@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Layanan Laundry - KlinKing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+  <div id="bubble-container" aria-hidden="true"></div>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo"><span class="logo-text">Klin<span>King</span></span></a>
+      <div class="nav-menu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="layanan.html" class="nav-link active">Layanan</a>
+        <a href="tentang.html" class="nav-link">Tentang</a>
+        <a href="index.html#testimoni" class="nav-link">Testimoni</a>
+        <a href="index.html#faq" class="nav-link">FAQ</a>
+        <button class="btn-primary btn-pesan">Pesan Sekarang</button>
+      </div>
+      <button class="mobile-toggle">☰</button>
+    </div>
+    <div class="mobile-menu">
+      <a href="index.html">Home</a>
+      <a href="layanan.html">Layanan</a>
+      <a href="tentang.html">Tentang</a>
+      <a href="index.html#testimoni">Testimoni</a>
+      <a href="index.html#faq">FAQ</a>
+      <button class="btn-primary btn-pesan">Pesan Sekarang</button>
+    </div>
+  </nav>
+
+  <section class="page-header">
+    <div class="container">
+      <h1>Layanan Laundry Kami</h1>
+      <p>Pilih layanan yang sesuai dengan kebutuhan Anda</p>
+    </div>
+  </section>
+
+  <section class="all-services">
+    <div class="container">
+      <div class="services-grid-full">
+        <div class="service-detail">
+          <div class="service-detail-icon"><i data-lucide="zap"></i></div>
+          <div class="service-detail-content">
+            <h2>Cuci Express <span class="badge">Cepat 6 Jam</span></h2>
+            <p>Layanan cuci cepat dengan waktu penyelesaian hanya 6 jam. Cocok untuk kebutuhan mendadak atau Anda yang ingin pakaian cepat selesai.</p>
+            <ul>
+              <li><i data-lucide="check-circle"></i> Selesai dalam 6 jam</li>
+              <li><i data-lucide="check-circle"></i> Deterjen premium & pewangi</li>
+              <li><i data-lucide="check-circle"></i> Gratis antar-jemput</li>
+              <li><i data-lucide="check-circle"></i> Pengemasan rapi</li>
+            </ul>
+            <div class="price">Rp 8.000<span>/kg</span></div>
+            <button class="btn-primary btn-pesan" data-layanan="Cuci Express">Pesan Layanan Ini</button>
+          </div>
+        </div>
+
+        <div class="service-detail featured-detail">
+          <div class="service-detail-icon"><i data-lucide="sparkles"></i></div>
+          <div class="service-detail-content">
+            <h2>Cuci & Setrika <span class="badge best">Best Seller</span></h2>
+            <p>Paket lengkap paling laris! Cuci bersih dan setrika rapi profesional. Pakaian siap pakai dengan hasil seperti baru.</p>
+            <ul>
+              <li><i data-lucide="check-circle"></i> Selesai dalam 24 jam</li>
+              <li><i data-lucide="check-circle"></i> Cuci + setrika rapi</li>
+              <li><i data-lucide="check-circle"></i> Gratis antar-jemput</li>
+              <li><i data-lucide="check-circle"></i> Lipat & kemas cantik</li>
+            </ul>
+            <div class="price">Rp 7.000<span>/kg</span></div>
+            <button class="btn-primary btn-pesan" data-layanan="Cuci & Setrika">Pesan Layanan Ini</button>
+          </div>
+        </div>
+
+        <div class="service-detail">
+          <div class="service-detail-icon"><i data-lucide="iron"></i></div>
+          <div class="service-detail-content">
+            <h2>Hanya Setrika <span class="badge">Ekonomis</span></h2>
+            <p>Sudah mencuci sendiri tapi malas menyetrika? Serahkan pada kami. Hasil setrika uap premium yang rapi dan wangi.</p>
+            <ul>
+              <li><i data-lucide="check-circle"></i> Selesai dalam 12 jam</li>
+              <li><i data-lucide="check-circle"></i> Setrika uap premium</li>
+              <li><i data-lucide="check-circle"></i> Lipat rapi</li>
+              <li><i data-lucide="check-circle"></i> Bisa request wangi tertentu</li>
+            </ul>
+            <div class="price">Rp 5.000<span>/kg</span></div>
+            <button class="btn-primary btn-pesan" data-layanan="Hanya Setrika">Pesan Layanan Ini</button>
+          </div>
+        </div>
+
+        <div class="service-detail">
+          <div class="service-detail-icon"><i data-lucide="calendar"></i></div>
+          <div class="service-detail-content">
+            <h2>Paket Langganan <span class="badge">Hemat 20%</span></h2>
+            <p>Untuk Anda yang rutin menggunakan jasa laundry. Nikmati diskon hingga 20% dan prioritas antar-jemput.</p>
+            <ul>
+              <li><i data-lucide="check-circle"></i> Diskon 10-20%</li>
+              <li><i data-lucide="check-circle"></i> Antar-jemput prioritas</li>
+              <li><i data-lucide="check-circle"></i> Jadwal tetap setiap minggu</li>
+              <li><i data-lucide="check-circle"></i> Pembayaran bisa per bulan</li>
+            </ul>
+            <div class="price">Mulai Rp 6.000<span>/kg</span></div>
+            <button class="btn-outline btn-pesan" data-layanan="Paket Langganan">Hubungi untuk Info</button>
+          </div>
+        </div>
+
+        <div class="service-detail">
+          <div class="service-detail-icon"><i data-lucide="hotel"></i></div>
+          <div class="service-detail-content">
+            <h2>Laundry Hotel & Katering</h2>
+            <p>Layanan khusus untuk hotel, villa, restoran, dan katering dengan kapasitas besar.</p>
+            <ul>
+              <li><i data-lucide="check-circle"></i> Kapasitas tidak terbatas</li>
+              <li><i data-lucide="check-circle"></i> Pengambilan & pengiriman terjadwal</li>
+              <li><i data-lucide="check-circle"></i> Harga khusus untuk korporasi</li>
+              <li><i data-lucide="check-circle"></i> Linen, handuk, serbet, dll</li>
+            </ul>
+            <div class="price">Hubungi CS</div>
+            <button class="btn-outline btn-pesan">Hubungi Kami</button>
+          </div>
+        </div>
+
+        <div class="service-detail">
+          <div class="service-detail-icon"><i data-lucide="package"></i></div>
+          <div class="service-detail-content">
+            <h2>Dry Cleaning</h2>
+            <p>Perawatan khusus untuk pakaian berbahan sensitif seperti jas, blazer, dress, dan bahan wool.</p>
+            <ul>
+              <li><i data-lucide="check-circle"></i> Per item (bukan per kg)</li>
+              <li><i data-lucide="check-circle"></i> Bahan kimia khusus profesional</li>
+              <li><i data-lucide="check-circle"></i> Penanganan hati-hati</li>
+              <li><i data-lucide="check-circle"></i> Garansi kepuasan</li>
+            </ul>
+            <div class="price">Mulai Rp 25.000<span>/item</span></div>
+            <button class="btn-outline btn-pesan">Pesan Dry Clean</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="why-us-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Kenapa Harus KlinKing?</h2>
+      </div>
+      <div class="benefits-grid">
+        <div><i data-lucide="truck"></i><h4>Antar-Jemput Gratis</h4><p>Kami datang ke lokasi Anda</p></div>
+        <div><i data-lucide="clock"></i><h4>Cepat & Tepat Waktu</h4><p>Tidak pernah terlambat</p></div>
+        <div><i data-lucide="heart"></i><h4>Ramah Kulit</h4><p>Deterjen premium aman</p></div>
+        <div><i data-lucide="shield-check"></i><h4>Garansi Cucian</h4><p>Tidak puas, cuci ulang gratis</p></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div><h3>Klin<span>King</span></h3><p>Laundry terpercaya untuk anak kos & hotel.</p></div>
+        <div><h4>Layanan</h4><ul><li><a href="layanan.html">Cuci Express</a></li><li><a href="layanan.html">Cuci & Setrika</a></li><li><a href="layanan.html">Hanya Setrika</a></li></ul></div>
+        <div><h4>Kontak</h4><ul><li><i data-lucide="phone"></i> +62-882-3233-8661</li><li><i data-lucide="mail"></i> admin@klinking.id</li></ul></div>
+      </div>
+      <div class="footer-bottom">© 2025 KlinKing. Semua hak dilindungi.</div>
+    </div>
+  </footer>
+
+  <div class="modal" id="bookingModal">
+    <div class="modal-content">
+      <div class="modal-header"><h3>Form Pemesanan Laundry</h3><button class="modal-close">&times;</button></div>
+      <form id="bookingForm">
+        <div class="form-group"><label>Nama Lengkap *</label><input type="text" id="nama" required></div>
+        <div class="form-group"><label>Nomor Telepon *</label><input type="tel" id="telp" required></div>
+        <div class="form-group"><label>Alamat Lengkap *</label><textarea id="alamat" rows="2" required></textarea></div>
+        <div class="form-group"><label>Pilih Layanan</label><select id="layanan"><option value="Cuci Express">Cuci Express</option><option value="Cuci & Setrika">Cuci & Setrika</option><option value="Hanya Setrika">Hanya Setrika</option></select></div>
+        <div class="form-row"><div class="form-group"><label>Tanggal Jemput</label><input type="date" id="tanggal" required></div><div class="form-group"><label>Jam Jemput</label><select id="jam"><option>08:00-10:00</option><option>10:00-12:00</option><option>13:00-15:00</option><option>15:00-17:00</option></select></div></div>
+        <button type="submit" class="btn-primary w-100">Kirim Pesanan</button>
+        <p class="form-note">*Data tersimpan dan hanya admin yang dapat mengakses</p>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

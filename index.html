@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KlinKing - Pakaian Bersih, Hidup Tenang</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <span class="logo-text">Klin<span>King</span></span>
+      </a>
+      <div class="nav-menu">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="layanan.html" class="nav-link">Layanan</a>
+        <a href="tentang.html" class="nav-link">Tentang</a>
+        <button class="btn-primary btn-pesan" data-pesan>Pesan Sekarang</button>
+      </div>
+      <button class="mobile-toggle" id="mobileToggle">☰</button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html">Home</a>
+      <a href="layanan.html">Layanan</a>
+      <a href="tentang.html">Tentang</a>
+      <a href="#testimoni">Testimoni</a>
+      <a href="#faq">FAQ</a>
+      <button class="btn-primary btn-pesan">Pesan Sekarang</button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-container">
+      <div class="hero-content">
+        <span class="hero-badge">🫧 LAUNDRY TERPERCAYA #1</span>
+        <h1 class="hero-title">Pakaian Bersih,<br><span>Hidup Tenang.</span></h1>
+        <p class="hero-subtitle">Gratis antar-jemput. Selesai dalam 24 jam. Tanpa ribet — tinggal pesan, kami yang urus sisanya.</p>
+        <div class="hero-buttons">
+          <button class="btn-primary btn-large btn-pesan">Pesan Sekarang</button>
+          <a href="layanan.html" class="btn-secondary btn-large">Lihat Layanan</a>
+        </div>
+        <div class="hero-features">
+          <span><i data-lucide="clock"></i> 24 jam selesai</span>
+          <span><i data-lucide="truck"></i> Gratis antar</span>
+          <span><i data-lucide="shield-check"></i> Garansi bersih</span>
+        </div>
+      </div>
+      <div class="hero-illustration">
+        <div class="machine-wrapper">
+          <div class="machine-glow"></div>
+          <div class="price-badge">Mulai 5rb/kg!</div>
+          <div class="washing-machine">
+            <div class="machine-body">
+              <div class="machine-door">
+                <div class="door-glass"></div>
+              </div>
+            </div>
+          </div>
+          <div id="bubble-container"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Bar -->
+  <section class="trust-bar">
+    <div class="trust-container">
+      <div class="trust-item"><i data-lucide="star"></i><span>4.9/5</span><small>dari 2.000+ review</small></div>
+      <div class="trust-item"><i data-lucide="users"></i><span>5.000+</span><small>pelanggan aktif</small></div>
+      <div class="trust-item"><i data-lucide="building"></i><span>30+</span><small>hotel partner</small></div>
+      <div class="trust-item"><i data-lucide="repeat"></i><span>95%</span><small>pelanggan kembali</small></div>
+    </div>
+  </section>
+
+  <!-- Preview Layanan -->
+  <section class="preview-layanan">
+    <div class="container">
+      <div class="section-header">
+        <span>Layanan Kami</span>
+        <h2>Pilihan Layanan Terbaik</h2>
+        <p>Semua layanan termasuk deterjen premium, pewangi, dan pengemasan rapi</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon"><i data-lucide="zap"></i></div>
+          <span class="service-badge">POPULER</span>
+          <h3>Cuci Express</h3>
+          <p>Selesai dalam 6 jam, cocok untuk kebutuhan mendadak</p>
+          <div class="service-price">Rp 8.000<span>/kg</span></div>
+          <button class="btn-outline w-100 btn-pesan" data-layanan="Cuci Express">Pesan Express</button>
+        </div>
+        <div class="service-card featured">
+          <div class="service-icon"><i data-lucide="sparkles"></i></div>
+          <span class="service-badge best">BEST VALUE ✨</span>
+          <h3>Cuci &amp; Setrika</h3>
+          <p>Paket lengkap paling laris, bersih dan rapi siap pakai</p>
+          <div class="service-price">Rp 7.000<span>/kg</span></div>
+          <button class="btn-primary w-100 btn-pesan" data-layanan="Cuci & Setrika">Pesan Sekarang</button>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i data-lucide="shirt"></i></div>
+          <h3>Hanya Setrika</h3>
+          <p>Setrika uap premium, hasil rapi seperti baru</p>
+          <div class="service-price">Rp 5.000<span>/kg</span></div>
+          <button class="btn-outline w-100 btn-pesan" data-layanan="Hanya Setrika">Pesan Setrika</button>
+        </div>
+      </div>
+      <div class="text-center mt-12">
+        <a href="layanan.html" class="btn-outline">Lihat Semua Layanan →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimoni -->
+  <section id="testimoni" class="testimoni">
+    <div class="container">
+      <div class="section-header">
+        <span>Testimoni</span>
+        <h2>Apa Kata Mereka</h2>
+      </div>
+      <div class="testimoni-grid">
+        <div class="testimoni-card">
+          <div class="stars">★★★★★</div>
+          <p>"Sebagai anak kos, ini penyelamat banget! Ga perlu antri di laundry kiloan lagi."</p>
+          <div class="testimoni-author">Rina S.<span>Mahasiswi, Depok</span></div>
+        </div>
+        <div class="testimoni-card">
+          <div class="stars">★★★★★</div>
+          <p>"Hotel kami pakai KlinKing untuk semua linen tamu. Kualitas konsisten dan tepat waktu!"</p>
+          <div class="testimoni-author">Budi P.<span>Manager Hotel</span></div>
+        </div>
+        <div class="testimoni-card">
+          <div class="stars">★★★★★</div>
+          <p>"Baju wangi banget, setrikaannya rapi kayak baru beli. Worth every rupiah!"</p>
+          <div class="testimoni-author">Dian K.<span>Pekerja Kantoran</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="faq">
+    <div class="container">
+      <div class="section-header">
+        <span>FAQ</span>
+        <h2>Pertanyaan Umum</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question">Berapa minimum order?<i data-lucide="chevron-down"></i></button>
+          <div class="faq-answer"><p>Minimum order hanya 2 kg. Cocok untuk kebutuhan personal maupun kos-kosan!</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Area mana saja yang dilayani?<i data-lucide="chevron-down"></i></button>
+          <div class="faq-answer"><p>Kami melayani area Yogyakarta Kota dan Sekitar. Untuk area lain, silakan hubungi kami.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Bagaimana jika pakaian rusak atau hilang?<i data-lucide="chevron-down"></i></button>
+          <div class="faq-answer"><p>Kami memberikan garansi penuh. Jika ada kerusakan atau kehilangan, kami ganti sesuai nilai pakaian.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Bisa bayar pakai apa saja?<i data-lucide="chevron-down"></i></button>
+          <div class="faq-answer"><p>Cash, transfer bank, GoPay, OVO, Dana, ShopeePay — semua bisa!</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Apakah ada paket langganan?<i data-lucide="chevron-down"></i></button>
+          <div class="faq-answer"><p>Ada! Paket mingguan dan bulanan dengan diskon hingga 20%. Hubungi kami untuk info lengkap.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="api-section">
+    <div class="container">
+
+        <h2>Daftar Artikel</h2>
+
+        <div id="api-data" class="api-grid"></div>
+
+    </div>
+</section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div>
+          <h3>Klin<span>King</span></h3>
+          <p>Laundry terpercaya untuk anak kos &amp; hotel. Bersih, cepat, dan selalu tepat waktu.</p>
+        </div>
+        <div>
+          <h4>Layanan</h4>
+          <ul>
+            <li><a href="layanan.html">Cuci Express</a></li>
+            <li><a href="layanan.html">Cuci &amp; Setrika</a></li>
+            <li><a href="layanan.html">Hanya Setrika</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Hubungi Kami</h4>
+          <ul>
+            <li><i data-lucide="map-pin"></i> Pringgolayan, Banguntapan, Bantul, DIY 55198</li>
+            <li><i data-lucide="phone"></i> +62-882-3233-8661</li>
+            <li><i data-lucide="mail"></i> admin@klinking.id</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">© 2025 KlinKing. Semua hak dilindungi.</div>
+    </div>
+  </footer>
+
+  <!-- Modal Form -->
+  <div class="modal" id="bookingModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Form Pemesanan Laundry</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <form id="bookingForm">
+        <div class="form-group">
+          <label>Nama Lengkap *</label>
+          <input type="text" id="nama" required placeholder="Masukkan nama lengkap">
+        </div>
+        <div class="form-group">
+          <label>Nomor Telepon *</label>
+          <input type="tel" id="telp" required placeholder="0812-3456-7890">
+        </div>
+        <div class="form-group">
+          <label>Alamat Lengkap *</label>
+          <textarea id="alamat" rows="2" required placeholder="Alamat lengkap untuk antar-jemput"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Pilih Layanan</label>
+          <select id="layanan">
+            <option value="Cuci Express">Cuci Express (Rp 8.000/kg)</option>
+            <option value="Cuci & Setrika">Cuci &amp; Setrika (Rp 7.000/kg)</option>
+            <option value="Hanya Setrika">Hanya Setrika (Rp 5.000/kg)</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Tanggal Jemput</label>
+            <input type="date" id="tanggal" required>
+          </div>
+          <div class="form-group">
+            <label>Jam Jemput</label>
+            <select id="jam">
+              <option>08:00 - 10:00</option>
+              <option>10:00 - 12:00</option>
+              <option>13:00 - 15:00</option>
+              <option>15:00 - 17:00</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Catatan Tambahan</label>
+          <textarea id="catatan" rows="2" placeholder="Contoh: Pakaian banyak, butuh kantong terpisah"></textarea>
+        </div>
+        <button type="submit" class="btn-primary w-100">Kirim Pesanan</button>
+        <p class="form-note">*Data akan tersimpan dan hanya dapat diakses oleh admin</p>
+      </form>
+    </div>
+  </div>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
