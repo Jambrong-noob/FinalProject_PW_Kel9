@@ -1,4 +1,4 @@
-let bookings = JSON.parse(localStorage.getItem('klinking_bookings') || '[]');
+ let bookings = JSON.parse(localStorage.getItem('klinking_bookings') || '[]');
 
 function saveBooking(data) {
   const newBooking = {
@@ -274,11 +274,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-document.addEventListener('DOMContentLoaded', function () {
+
+    document.addEventListener('DOMContentLoaded', function () {
 
     const apiData = document.getElementById('api-data');
+    const loading = document.getElementById('loading');
 
     const articles = [
+
 
     {
         title: "Promo Laundry 20%",
@@ -340,23 +343,33 @@ document.addEventListener('DOMContentLoaded', function () {
         image: "image/jam.jpg"
     }
 
-    ];
+     ];
 
-    articles.forEach(item => {
+    
+    loading.style.display = 'block';
 
-        const card = document.createElement('div');
+    
+    setTimeout(() => {
 
-        card.style.backgroundImage = `url(${item.image})`;
+        loading.style.display = 'none';
 
-        card.classList.add('api-card');
+        articles.forEach(item => {
 
-        card.innerHTML = `
-            <h3>${item.title}</h3>
-            <p>${item.desc}</p>
-        `;
+            const card = document.createElement('div');
 
-        apiData.appendChild(card);
+            card.classList.add('api-card');
 
-    });
+            card.style.backgroundImage = `url(${item.image})`;
+
+            card.innerHTML = `
+                <h3>${item.title}</h3>
+                <p>${item.desc}</p>
+            `;
+
+            apiData.appendChild(card);
+
+        });
+
+    }, 2000);
 
 });

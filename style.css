@@ -788,6 +788,13 @@ h1, h2, h3, h4, .logo-text {
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
+.loading {
+    text-align: center;
+    font-size: 20px;
+    padding: 30px;
+    color: #0f172a;
+}
+
 .footer {
   background: #092740;
   color: #a8d9ef;
