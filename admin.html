@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - KlinKing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: #f4f7f8;
+      color: #1a2b3c;
+    }
+    .topbar {
+      background: #14b898;
+      color: #fff;
+      padding: 18px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .topbar h1 { font-size: 20px; font-weight: 700; }
+    .topbar button {
+      background: rgba(255,255,255,0.15);
+      border: none;
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 32px 20px; }
+
+    /* Login */
+    #loginBox {
+      max-width: 380px;
+      margin: 80px auto;
+      background: #fff;
+      padding: 32px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+    #loginBox h2 { margin-bottom: 20px; font-size: 22px; }
+    #loginBox input {
+      width: 100%;
+      padding: 12px 14px;
+      margin-bottom: 14px;
+      border: 1px solid #dfe6e9;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+    #loginBox button {
+      width: 100%;
+      padding: 12px;
+      background: #14b898;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 15px;
+    }
+    #loginError { color: #e74c3c; font-size: 13px; margin-bottom: 10px; display: none; }
+
+    /* Table */
+    table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.05); }
+    th, td { padding: 14px 16px; text-align: left; font-size: 14px; border-bottom: 1px solid #eef1f2; }
+    th { background: #eafaf6; color: #0d7a63; font-weight: 700; text-transform: uppercase; font-size: 12px; letter-spacing: 0.5px; }
+    tr:last-child td { border-bottom: none; }
+
+    .status-badge { padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+    .status-pending { background: #fff3cd; color: #856404; }
+    .status-diproses { background: #cfe2ff; color: #084298; }
+    .status-selesai { background: #d1e7dd; color: #0f5132; }
+    .status-dibatalkan { background: #f8d7da; color: #842029; }
+
+    select.status-select { padding: 6px 8px; border-radius: 8px; border: 1px solid #dfe6e9; font-size: 13px; }
+    .del-btn { background: #f8d7da; color: #842029; border: none; padding: 6px 10px; border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: 700; }
+
+    #emptyState, #loadingState { text-align: center; padding: 40px; color: #7f8c8d; }
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN -->
+  <div id="loginBox">
+    <h2>🔐 Login Admin KlinKing</h2>
+    <p id="loginError">Username atau password salah.</p>
+    <input type="text" id="username" placeholder="Username" autocomplete="username">
+    <input type="password" id="password" placeholder="Password" autocomplete="current-password">
+    <button id="loginBtn">Masuk</button>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div id="dashboard" class="hidden">
+    <div class="topbar">
+      <h1>📋 Dashboard Pesanan - KlinKing</h1>
+      <button id="logoutBtn">Keluar</button>
+    </div>
+    <div class="wrap">
+      <div id="loadingState">Memuat data pesanan...</div>
+      <div id="emptyState" class="hidden">Belum ada pesanan masuk.</div>
+      <table id="bookingsTable" class="hidden">
+        <thead>
+          <tr>
+            <th>Nama</th>
+            <th>Telp</th>
+            <th>Alamat</th>
+            <th>Layanan</th>
+            <th>Tanggal</th>
+            <th>Jam</th>
+            <th>Status</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody id="bookingsBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    const API_BASE_URL = 'http://localhost:3000/api';
+
+    const loginBox = document.getElementById('loginBox');
+    const dashboard = document.getElementById('dashboard');
+    const loginError = document.getElementById('loginError');
+
+    function getToken() { return sessionStorage.getItem('klinking_admin_token'); }
+    function setToken(t) { sessionStorage.setItem('klinking_admin_token', t); }
+    function clearToken() { sessionStorage.removeItem('klinking_admin_token'); }
+
+    function authHeaders() {
+      return { headers: { Authorization: `Bearer ${getToken()}` } };
+    }
+
+    async function login() {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+      loginError.style.display = 'none';
+
+      try {
+        const res = await axios.post(`${API_BASE_URL}/auth/login`, { username, password });
+        setToken(res.data.token);
+        showDashboard();
+      } catch (err) {
+        loginError.textContent = err.response?.data?.message || 'Gagal login.';
+        loginError.style.display = 'block';
+      }
+    }
+
+    function logout() {
+      clearToken();
+      loginBox.classList.remove('hidden');
+      dashboard.classList.add('hidden');
+    }
+
+    async function showDashboard() {
+      loginBox.classList.add('hidden');
+      dashboard.classList.remove('hidden');
+      await loadBookings();
+    }
+
+    async function loadBookings() {
+      const loadingState = document.getElementById('loadingState');
+      const emptyState = document.getElementById('emptyState');
+      const table = document.getElementById('bookingsTable');
+      const tbody = document.getElementById('bookingsBody');
+
+      loadingState.classList.remove('hidden');
+      emptyState.classList.add('hidden');
+      table.classList.add('hidden');
+
+      try {
+        const res = await axios.get(`${API_BASE_URL}/bookings`, authHeaders());
+        const bookings = res.data;
+
+        loadingState.classList.add('hidden');
+
+        if (bookings.length === 0) {
+          emptyState.classList.remove('hidden');
+          return;
+        }
+
+        tbody.innerHTML = '';
+        bookings.forEach(b => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${b.nama}</td>
+            <td>${b.telp}</td>
+            <td>${b.alamat}</td>
+            <td>${b.layanan}</td>
+            <td>${b.tanggal}</td>
+            <td>${b.jam || '-'}</td>
+            <td>
+              <select class="status-select" data-id="${b.id}">
+                ${['pending', 'diproses', 'selesai', 'dibatalkan'].map(s =>
+                  `<option value="${s}" ${s === b.status ? 'selected' : ''}>${s}</option>`
+                ).join('')}
+              </select>
+            </td>
+            <td><button class="del-btn" data-id="${b.id}">Hapus</button></td>
+          `;
+          tbody.appendChild(tr);
+        });
+
+        table.classList.remove('hidden');
+
+        tbody.querySelectorAll('.status-select').forEach(sel => {
+          sel.addEventListener('change', async (e) => {
+            const id = e.target.getAttribute('data-id');
+            try {
+              await axios.patch(`${API_BASE_URL}/bookings/${id}/status`, { status: e.target.value }, authHeaders());
+            } catch (err) {
+              alert('Gagal update status.');
+            }
+          });
+        });
+
+        tbody.querySelectorAll('.del-btn').forEach(btn => {
+          btn.addEventListener('click', async (e) => {
+            const id = e.target.getAttribute('data-id');
+            if (!confirm('Hapus pesanan ini?')) return;
+            try {
+              await axios.delete(`${API_BASE_URL}/bookings/${id}`, authHeaders());
+              loadBookings();
+            } catch (err) {
+              alert('Gagal menghapus pesanan.');
+            }
+          });
+        });
+
+      } catch (err) {
+        if (err.response?.status === 401) {
+          logout();
+        } else {
+          loadingState.textContent = 'Gagal memuat data. Pastikan server backend menyala.';
+        }
+      }
+    }
+
+    document.getElementById('loginBtn').addEventListener('click', login);
+    document.getElementById('password').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') login();
+    });
+    document.getElementById('logoutBtn').addEventListener('click', logout);
+
+    // Auto-login jika token masih tersimpan di session
+    if (getToken()) {
+      showDashboard();
+    }
+  </script>
+</body>
+</html>

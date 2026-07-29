@@ -1,15 +1,10 @@
- let bookings = JSON.parse(localStorage.getItem('klinking_bookings') || '[]');
+// Ganti URL ini sesuai alamat backend kamu saat deploy
+const API_BASE_URL = 'http://localhost:3000/api';
 
-function saveBooking(data) {
-  const newBooking = {
-    id: Date.now(),
-    ...data,
-    tanggalPesan: new Date().toISOString(),
-    status: 'pending'
-  };
-  bookings.push(newBooking);
-  localStorage.setItem('klinking_bookings', JSON.stringify(bookings));
-  return newBooking;
+// Mengirim data booking ke backend (menggantikan localStorage lama)
+async function saveBooking(data) {
+  const response = await axios.post(`${API_BASE_URL}/bookings`, data);
+  return response.data;
 }
 
 function showNotification(message) {
@@ -76,7 +71,7 @@ function setupForm() {
   const form = document.getElementById('bookingForm');
   if (!form) return;
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const nama = document.getElementById('nama')?.value.trim();
@@ -98,12 +93,24 @@ function setupForm() {
     }
 
     const bookingData = { nama, telp, alamat, layanan, tanggal, jam, catatan };
+    const submitBtn = form.querySelector('button[type="submit"]');
 
-    saveBooking(bookingData);
-    showNotification('Pesanan berhasil dikirim! Admin akan segera menghubungi Anda.');
-    form.reset();
-    closeModal();
-    setMinDate();
+    try {
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Mengirim...'; }
+
+      await saveBooking(bookingData);
+
+      showNotification('Pesanan berhasil dikirim! Admin akan segera menghubungi Anda.');
+      form.reset();
+      closeModal();
+      setMinDate();
+    } catch (err) {
+      console.error(err);
+      const msg = err.response?.data?.message || 'Gagal mengirim pesanan. Coba lagi nanti.';
+      alert(msg);
+    } finally {
+      if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Kirim Pesanan'; }
+    }
   });
 }
 
@@ -247,10 +254,6 @@ function setupSmoothScroll() {
   });
 }
 
-const loading = document.getElementById('loading');
-const apiData = document.getElementById('api-data');
-
-
 document.addEventListener('DOMContentLoaded', () => {
   initIcons();
   setupPesanButtons();
@@ -275,101 +278,33 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-    document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
 
-    const apiData = document.getElementById('api-data');
-    const loading = document.getElementById('loading');
+  const apiData = document.getElementById('api-data');
+  const loading = document.getElementById('loading');
 
-    const articles = [
+  if (!apiData || !loading) return;
 
+  loading.style.display = 'block';
 
-    {
-        title: "Promo Laundry 20%",
-        desc: "Nikmati diskon 20% untuk semua layanan laundry selama bulan ini.",
-        image: "image/diskon20%.jpg"
-    },
+  try {
+    const response = await axios.get(`${API_BASE_URL}/articles`);
+    const articles = response.data;
 
-    {
-        title: "Cuci Express 24 Jam",
-        desc: "Layanan express membuat pakaian selesai hanya dalam 24 jam.",
-        image: "image/24jam.jpg"
-    },
+    loading.style.display = 'none';
 
-    {
-        title: "Gratis Antar Jemput",
-        desc: "Khusus area Pringgolayan tersedia layanan antar jemput gratis.",
-        image: "image/freedeliv.jpg"
-    },
-
-    {
-        title: "Tips Merawat Pakaian Putih",
-        desc: "Pisahkan pakaian putih dan gunakan deterjen khusus agar warna tetap cerah.",
-        image: "image/peduli.jpg"
-    },
-
-    {
-        title: "Laundry Hotel & Kos",
-        desc: "Kami menerima laundry dalam jumlah besar untuk hotel dan anak kos.",
-        image: "image/hotel.jpg"
-    },
-
-    {
-        title: "Paket Hemat Bulanan",
-        desc: "Tersedia paket langganan laundry bulanan dengan harga lebih murah.",
-        image: "image/promo.png"
-    },
-
-    {
-        title: "Setrika Premium",
-        desc: "Pakaian disetrika dengan rapi menggunakan pewangi premium.",
-        image: "image/setrika.png"
-    },
-
-    {
-        title: "Laundry Sepatu",
-        desc: "Kami melayani pencucian sepatu agar kembali bersih dan wangi.",
-        image: "image/sepatu.jpg"
-    },
-
-    {
-        title: "Laundry Selimut",
-        desc: "Selimut dan bed cover dicuci menggunakan mesin khusus berkapasitas besar.",
-        image: "image/selimut.jpg"
-    },
-
-    {
-        title: "Jam Operasional",
-        desc: "Buka setiap hari mulai pukul 08.00 hingga 21.00 WIB.",
-        image: "image/jam.jpg"
-    }
-
-     ];
-
-    
-    loading.style.display = 'block';
-
-    
-    setTimeout(() => {
-
-        loading.style.display = 'none';
-
-        articles.forEach(item => {
-
-            const card = document.createElement('div');
-
-            card.classList.add('api-card');
-
-            card.style.backgroundImage = `url(${item.image})`;
-
-            card.innerHTML = `
-                <h3>${item.title}</h3>
-                <p>${item.desc}</p>
-            `;
-
-            apiData.appendChild(card);
-
-        });
-
-    }, 2000);
-
+    articles.forEach(item => {
+      const card = document.createElement('div');
+      card.classList.add('api-card');
+      card.style.backgroundImage = `url(${item.image})`;
+      card.innerHTML = `
+        <h3>${item.title}</h3>
+        <p>${item.description}</p>
+      `;
+      apiData.appendChild(card);
+    });
+  } catch (err) {
+    console.error(err);
+    loading.textContent = 'Gagal memuat artikel. Coba refresh halaman.';
+  }
 });
